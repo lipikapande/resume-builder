@@ -11,8 +11,21 @@ export default function BuildResume() {
     const formData = new FormData();
     formData.append("myFile", selectedFile, selectedFile.name);
     console.log(selectedFile);
-    axios.post("api/uploadfile", formData);
+
+    axios
+      .post("http://localhost:8000/api/uploadfile", formData)
+      .then((response) => {
+        console.log(response.data);
+        alert(
+          `✅ ${response.data.message} (Filename: ${response.data.filename})`
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("❌ Upload failed. Please try again.");
+      });
   };
+
   const fileData = () => {
     if (selectedFile) {
       return (
@@ -27,7 +40,7 @@ export default function BuildResume() {
       return (
         <div>
           <br />
-          <h4>Choose before Pressing the Upload button</h4>
+          <h4>Browse...</h4>
         </div>
       );
     }
@@ -35,8 +48,8 @@ export default function BuildResume() {
 
   return (
     <div>
-      <h1>GeeksforGeeks</h1>
-      <h3>File Upload using React!</h3>
+      <h1>AI-tailored resume in seconds</h1>
+      <h3>Upload your CV file</h3>
       <div>
         <input type="file" onChange={onFileChange} />
         <button onClick={onFileUpload}>Upload!</button>
@@ -46,7 +59,4 @@ export default function BuildResume() {
   );
 }
 
-// NOTES FOR LATER:
-
-// 1. JSX mein 'for' is a reserved keyword. So we use htmlFor.
-// 2. all input and br tags must be self-closing.
+//axios used in place of 'fetch' to make HTTP requests from web browsers or Node.js environments.

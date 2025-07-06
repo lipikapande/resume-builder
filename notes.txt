@@ -1,0 +1,6 @@
+NOTES FOR LATER:
+
+1. JSX mein 'for' is a reserved keyword. So we use htmlFor.
+2. all input and br tags must be self-closing.
+3. Frontend runs on port 3000. Backend runs on port 8000. CORS middleware allows them to talk.
+4. axios: helps in fetching HTTP requests.
